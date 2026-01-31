@@ -53,23 +53,17 @@ function showConfirm (title, message) {
 
         const handleConfirm = () => {
             confirmModal.classList.remove('active');
-            cleanup();
             resolve(true);
         };
 
         const handleCancel = () => {
             confirmModal.classList.remove('active');
-            cleanup();
             resolve(false);
         };
 
-        const cleanup = () => {
-            confirmOkBtn.removeEventListener('click', handleConfirm);
-            confirmCancelBtn.removeEventListener('click', handleCancel);
-        };
-
-        confirmOkBtn.addEventListener('click', handleConfirm);
-        confirmCancelBtn.addEventListener('click', handleCancel);
+        // Use { once: true } to automatically remove listeners after one click
+        confirmOkBtn.addEventListener('click', handleConfirm, { once: true });
+        confirmCancelBtn.addEventListener('click', handleCancel, { once: true });
     });
 }
 
