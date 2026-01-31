@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <main class="container">
         <header class="app-header">
@@ -22,7 +24,7 @@
                 <div class="timer-label">Tiempo restante</div>
                 <div class="timer-value" id="timerDisplay">40:00</div>
             </div>
-            
+
             <div class="timer-controls">
                 <button id="startBtn" class="btn btn-primary">Iniciar</button>
                 <button id="pauseBtn" class="btn btn-secondary" style="display: none;">Pausar</button>
@@ -34,6 +36,20 @@
             </div>
         </section>
     </main>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-content confirm-modal">
+            <div class="modal-header">
+                <h2 id="confirmTitle">Confirmar acción</h2>
+                <p class="modal-subtitle" id="confirmMessage">¿Estás seguro?</p>
+            </div>
+            <div class="confirm-actions">
+                <button id="confirmCancelBtn" class="btn btn-tertiary">Cancelar</button>
+                <button id="confirmOkBtn" class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Break Modal -->
     <div class="modal-overlay" id="breakModal">
@@ -74,4 +90,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>

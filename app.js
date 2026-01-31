@@ -35,6 +35,43 @@ const progressFill = document.getElementById('progressFill');
 const breakModal = document.getElementById('breakModal');
 const exerciseList = document.getElementById('exerciseList');
 const finishEarlyBtn = document.getElementById('finishEarlyBtn');
+const confirmModal = document.getElementById('confirmModal');
+const confirmTitle = document.getElementById('confirmTitle');
+const confirmMessage = document.getElementById('confirmMessage');
+const confirmOkBtn = document.getElementById('confirmOkBtn');
+const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+
+// ==================== //
+// Confirmation Modal Functions
+// ==================== //
+
+function showConfirm (title, message) {
+    return new Promise((resolve) => {
+        confirmTitle.textContent = title;
+        confirmMessage.textContent = message;
+        confirmModal.classList.add('active');
+
+        const handleConfirm = () => {
+            confirmModal.classList.remove('active');
+            cleanup();
+            resolve(true);
+        };
+
+        const handleCancel = () => {
+            confirmModal.classList.remove('active');
+            cleanup();
+            resolve(false);
+        };
+
+        const cleanup = () => {
+            confirmOkBtn.removeEventListener('click', handleConfirm);
+            confirmCancelBtn.removeEventListener('click', handleCancel);
+        };
+
+        confirmOkBtn.addEventListener('click', handleConfirm);
+        confirmCancelBtn.addEventListener('click', handleCancel);
+    });
+}
 
 // ==================== //
 // Notification Functions
@@ -344,14 +381,22 @@ pauseBtn.addEventListener('click', () => {
     stopTimer();
 });
 
-resetBtn.addEventListener('click', () => {
-    if (confirm('¿Estás seguro de que quieres reiniciar el temporizador?')) {
+resetBtn.addEventListener('click', async () => {
+    const confirmed = await showConfirm(
+        'Reiniciar temporizador',
+        '¿Estás seguro de que quieres reiniciar el temporizador?'
+    );
+    if (confirmed) {
         resetTimer();
     }
 });
 
-finishEarlyBtn.addEventListener('click', () => {
-    if (confirm('¿Ya terminaste tu pausa activa?')) {
+finishEarlyBtn.addEventListener('click', async () => {
+    const confirmed = await showConfirm(
+        'Terminar pausa',
+        '¿Ya terminaste tu pausa activa?'
+    );
+    if (confirmed) {
         stopTimer();
         finishBreak();
     }

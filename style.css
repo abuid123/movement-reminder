@@ -271,6 +271,25 @@ body {
 }
 
 /* ==================== */
+/* Confirmation Modal */
+/* ==================== */
+
+.confirm-modal {
+    max-width: 450px;
+    text-align: center;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+}
+
+.confirm-actions .btn {
+    flex: 1;
+}
+
+/* ==================== */
 /* Modal Header */
 /* ==================== */
 
