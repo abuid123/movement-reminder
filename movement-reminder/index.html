@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pausa Activa - Recordatorio de Movimiento</title>
+    <meta name="description" content="Recordatorio activo para pausas de movimiento cada 40 minutos">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header class="app-header">
+            <h1>🧘 Pausa Activa</h1>
+            <p class="subtitle">Cuida tu cuerpo cada 40 minutos</p>
+        </header>
+
+        <section class="timer-section" id="timerSection">
+            <div class="timer-display">
+                <div class="timer-label">Tiempo restante</div>
+                <div class="timer-value" id="timerDisplay">40:00</div>
+            </div>
+            
+            <div class="timer-controls">
+                <button id="startBtn" class="btn btn-primary">Iniciar</button>
+                <button id="pauseBtn" class="btn btn-secondary" style="display: none;">Pausar</button>
+                <button id="resetBtn" class="btn btn-tertiary">Reiniciar</button>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Break Modal -->
+    <div class="modal-overlay" id="breakModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⏰ Hora de moverte</h2>
+                <p class="modal-subtitle">Pausa activa de 5 minutos</p>
+            </div>
+
+            <div class="break-timer">
+                <div class="break-timer-value" id="breakTimerDisplay">05:00</div>
+            </div>
+
+            <div class="exercises-section">
+                <h3>Tu rutina de hoy:</h3>
+                <ul class="exercise-list" id="exerciseList">
+                    <!-- Exercises will be populated by JavaScript -->
+                </ul>
+            </div>
+
+            <div class="mental-reminders">
+                <h3>Plus mental:</h3>
+                <ul class="reminder-list">
+                    <li>
+                        <input type="checkbox" id="mental1">
+                        <label for="mental1">Mirar algo lejos durante 20–30 segundos</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="mental2">
+                        <label for="mental2">Cambiar de postura un rato (parado o apoyado)</label>
+                    </li>
+                </ul>
+            </div>
+
+            <button id="finishEarlyBtn" class="btn btn-finish">Terminé antes</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
