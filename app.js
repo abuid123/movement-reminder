@@ -17,7 +17,8 @@ let state = {
     mode: 'work', // 'work' or 'break'
     timeRemaining: WORK_TIME,
     isRunning: false,
-    selectedExercises: []
+    selectedExercises: [],
+    startTimestamp: null // Track when timer started for accurate time calculation
 };
 
 let timerInterval = null;
@@ -198,6 +199,7 @@ function saveState () {
         timeRemaining: state.timeRemaining,
         isRunning: state.isRunning,
         selectedExercises: state.selectedExercises,
+        startTimestamp: state.startTimestamp,
         timestamp: Date.now()
     }));
 }
@@ -212,6 +214,7 @@ function loadState () {
 
         state.mode = parsed.mode;
         state.selectedExercises = parsed.selectedExercises || [];
+        state.startTimestamp = parsed.startTimestamp;
 
         if (parsed.isRunning) {
             // Adjust time based on elapsed time
@@ -253,10 +256,18 @@ function startTimer () {
     if (state.isRunning) return;
 
     state.isRunning = true;
+    // Set start timestamp and store the initial time we're starting from
+    state.startTimestamp = Date.now();
+    const initialTimeRemaining = state.timeRemaining;
     updateButtonStates();
 
     timerInterval = setInterval(() => {
-        state.timeRemaining--;
+        // Calculate elapsed time since start
+        const elapsed = Math.floor((Date.now() - state.startTimestamp) / 1000);
+
+        // Calculate remaining time based on elapsed time from initial value
+        state.timeRemaining = Math.max(0, initialTimeRemaining - elapsed);
+
         updateDisplay();
         saveState();
 
