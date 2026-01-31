@@ -2,7 +2,7 @@
 // State Management
 // ==================== //
 
-const WORK_TIME = 10; // 10 seconds for testing (normally 40 * 60)
+const WORK_TIME = 40 * 60; // 10 seconds for testing (normally 40 * 60)
 const BREAK_TIME = 5 * 60; // 5 minutes in seconds
 
 const exercises = [
